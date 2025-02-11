@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content Briefing</title>
+    <style>
+      body {
+        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+      .container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+      }
+      h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: #666;
+      }
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+        background-color: white;
+      }
+      .submit-btn {
+        width: auto;
+        padding: 10px;
+        background-color: #f0f0f0;
+        border: none;
+        border-radius: 4px;
+        color: #333;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-right: 10px;
+      }
+      .submit-btn:hover {
+        background-color: #e0e0e0;
+      }
+      #mainInfoPage {
+        display: none;
+      }
+      .main-info-container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 600px;
+        margin-bottom: 20px;
+      }
+      .main-info-container h2 {
+        border-bottom: 2px solid #f0f0f0;
+        padding-bottom: 10px;
+      }
+      .info-item {
+        margin-bottom: 15px;
+      }
+      .info-item strong {
+        color: #333;
+        display: inline-block;
+        width: 200px;
+      }
+      .button-group {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+      }
+      .accordion {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        padding: 10px;
+        cursor: pointer;
+      }
+      .accordion-content {
+        display: none;
+        padding: 15px;
+        border-top: 1px solid #ddd;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .accordion-content h3 {
+        margin-top: 20px;
+      }
+      .accordion-content p,
+      .accordion-content ul {
+        margin-bottom: 15px;
+      }
+      .accordion.active .accordion-content {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="contentBriefingPage" class="container">
+      <form id="contentBriefingForm">
+        <h2>Content Briefing</h2>
+        <div class="form-group">
+          <label for="country">Country:</label>
+          <input type="text" id="country" name="country" required />
+        </div>
+        <div class="form-group">
+          <label for="language">Language:</label>
+          <input type="text" id="language" name="language" required />
+        </div>
+        <div class="form-group">
+          <label for="topicArticleType">Topic/ Article type:</label>
+          <select id="topicArticleType" name="topicArticleType" required>
+            <option value="">Select an option</option>
+            <option value="code">Code</option>
+            <option value="app">App</option>
+            <option value="review">Review</option>
+            <option value="levantamentos">Levantamentos</option>
+            <option value="bonus">Bônus</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="website">Website:</label>
+          <input type="text" id="website" name="website" required />
+        </div>
+        <div class="form-group">
+          <label for="words">Words:</label>
+          <input type="number" id="words" name="words" required />
+        </div>
+        <div class="form-group">
+          <label for="operators">Operator(s):</label>
+          <input type="text" id="operators" name="operators" />
+        </div>
+        <div class="form-group">
+          <label for="bonusCodes">Bonus code(s):</label>
+          <input type="text" id="bonusCodes" name="bonusCodes" />
+        </div>
+        <div class="form-group">
+          <label for="exclusiveOffers">Exclusive Offers:</label>
+          <input type="text" id="exclusiveOffers" name="exclusiveOffers" />
+        </div>
+        <div class="form-group">
+          <label for="termsConditions">Terms & Conditions:</label>
+          <input type="text" id="termsConditions" name="termsConditions" />
+        </div>
+        <div class="form-group">
+          <label for="keyword">Keyword:</label>
+          <input type="text" id="keyword" name="keyword" />
+        </div>
+        <div class="form-group">
+          <label for="otherKeywords">Other keywords to include:</label>
+          <input type="text" id="otherKeywords" name="otherKeywords" />
+        </div>
+        <div class="form-group">
+          <label for="otherImportantInfo">Other important info:</label>
+          <textarea
+            id="otherImportantInfo"
+            name="otherImportantInfo"
+          ></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </div>
+
+    <div id="mainInfoPage" class="main-info-container">
+      <h2>Main Info</h2>
+      <div id="mainInfoContent"></div>
+      <div class="button-group">
+        <button id="copyButton" class="submit-btn">Copy All</button>
+        <button id="backButton" class="submit-btn">Back to Form</button>
+      </div>
+
+      <div id="codeInfo" class="accordion">
+        <div class="accordion-header">▶ Important Information for Code</div>
+        <div class="accordion-content">
+          <h3>Important</h3>
+          <h4>User Intent</h4>
+          <p>
+            Sports bettors search for promotional codes to maximize their
+            chances and receive extra benefits on betting sites. They want to:
+          </p>
+          <ul>
+            <li>
+              Find valid codes that offer advantages like free bets, welcome
+              bonuses, or deposit multipliers
+            </li>
+            <li>
+              Learn step-by-step how to activate these codes to avoid missing
+              out on offers properly
+            </li>
+            <li>
+              Know in detail all rules and requirements needed to qualify for
+              bonuses, including minimum deposit amounts and validity periods
+            </li>
+            <li>
+              Discover which sports and types of bets the codes can be used on,
+              ensuring they can take advantage of the benefit in their preferred
+              categories
+            </li>
+          </ul>
+          <h4>Tone and Voice</h4>
+          <ul>
+            <li>Use active and direct language</li>
+            <li>
+              Maintain an informative tone without promotional exaggeration
+            </li>
+            <li>Prioritize clarity and objectivity in explanations</li>
+            <li>
+              We are not the bookmaker, so don’t use the pronoun “us” (or “our
+              bonuses”, “our promos,” etc.)
+            </li>
+          </ul>
+          <h4>Keywords</h4>
+          <p>
+            Remember: If you’re using Surfer SEO, Yoast, or any tool that checks
+            your content, don’t take recommendations literally. This can take
+            the natural tone of the article. We must always think about user
+            intent first.
+          </p>
+          <ul>
+            <li>
+              Keyword Stuffing: We do not recommend that practice. Place the
+              main keyword at the top of the article and naturally 2 or 3 times.
+              You can use the H2 also.
+            </li>
+            <li>
+              Keywords that are misspelled should always be corrected,
+              regardless of what the brief says;
+            </li>
+            <li>The same applies to accents;</li>
+            <li>
+              Capitalization must also be corrected since they affect the
+              overall quality of the text and may harm compliance;
+            </li>
+            <li>
+              Hyphens, dots, and spaces should be appropriately used as well,
+              since they do not affect ranking, but harm the quality of the text
+              if incorrect;
+            </li>
+          </ul>
+          <h4>Article Title & Meta Title</h4>
+          <p>
+            Tool to check:
+            <a
+              href="https://mangools.com/free-seo-tools/serp-simulator"
+              target="_blank"
+              >Serp Simulator</a
+            >
+          </p>
+          <h5>IMPORTANT: Article Title</h5>
+          <ul>
+            <li>Hook readers in first 3-5 words</li>
+            <li>Keep between 50-60 characters</li>
+            <li>Front-load keywords</li>
+            <li>Write in active voice</li>
+            <li>Include the current year when relevant</li>
+            <li>Use emotion-triggering words</li>
+            <li>Address user intent directly</li>
+            <li>Create clear value proposition</li>
+          </ul>
+          <h5>Technical Best Practices</h5>
+          <ul>
+            <li>Primary keyword within the first 3 words</li>
+            <li>Format: Primary Keyword - Secondary Keyword | Brand</li>
+            <li>No special characters (except - and |)</li>
+            <li>Title case format</li>
+            <li>Include power words (Best, Guide, How, Why)</li>
+            <li>Numbers at the beginning when relevant</li>
+            <li>Use modifiers (Ultimate, Complete, Best)</li>
+            <li>
+              Example Article Titles: "Código Promocional Betclic: Ofertas
+              Exclusivas 2025 | Use Vivaclic"
+            </li>
+          </ul>
+          <h5>IMPORTANT: Meta description</h5>
+          <ul>
+            <li>Write compelling call-to-action</li>
+            <li>Describe the unique value proposition</li>
+            <li>Use natural, conversational language</li>
+            <li>Address the reader's main problem</li>
+            <li>Include benefit statements</li>
+            <li>Match search intent</li>
+            <li>Avoid clickbait language</li>
+            <li>Maintain brand voice</li>
+          </ul>
+          <h5>Technical Best Practices</h5>
+          <ul>
+            <li>Length: 140-160 characters</li>
+            <li>Include primary and secondary keywords</li>
+            <li>Use action verbs</li>
+            <li>Add call-to-action</li>
+            <li>No duplicate meta descriptions</li>
+            <li>Avoid quotes or special characters</li>
+            <li>Match content accurately</li>
+            <li>Include key benefits or features</li>
+          </ul>
+          <p>
+            Example Meta Descriptions: “O código promocional Betclic VIVACLIC
+            maximiza as suas apostas hoje! Bônus exclusivos, ofertas imperdíveis
+            e dicas de especialistas. Aposte com confiança e aumente suas
+            chances de ganhar"
+          </p>
+          <h4>Content</h4>
+          <ul>
+            <li>
+              Use short sentences and avoid heavy structures or overly
+              complicated/formal language.
+            </li>
+            <li>
+              Sentence length: not more than 20 words. All content is
+              mobile-first focused.
+            </li>
+            <li>
+              Paragraph length: not more than 300 words. All content is
+              mobile-first focused.
+            </li>
+            <li>
+              Use numbered lists for step-by-steps and bullet lists for names,
+              T&Cs, categories, sections, etc.
+            </li>
+            <li>
+              Keep numbered lists up to 7 steps long, with a couple of sentences
+              each, maximum, and bullet lists up to 10 points.
+            </li>
+            <li>
+              Bonus: Keep bullet lists of up to 5 and add promo code, rollover,
+              validity, and offer evaluation.
+            </li>
+            <li>
+              Please, avoid using "he," "she," or "them" when referring to
+              operators and give preference to synonyms like "operator,"
+              "platform," "betting company," etc.
+            </li>
+            <li>
+              If you are abroad, please use a VPN to make sure that the bonuses
+              mentioned are available for people in the targeted country.
+            </li>
+            <li>100% original content.</li>
+            <li>
+              Use bold to highlight key phrases (avoid single words, as well as
+              entire sentences or even two sentences in a row), button names,
+              and any promo codes given (for the latter two, don’t use italics
+              or quotation marks).
+            </li>
+            <li>
+              Use transition words such as: for example, most importantly,
+              firstly, in addition, in conclusion, above all, in other words,
+              etc.
+            </li>
+          </ul>
+          <h4>Example of Content Structure</h4>
+          <p>
+            Think of the article as a pyramid: Answer the user intent right away
+            in 1 or 2 paragraphs.
+          </p>
+          <h5>H2: Introdução aos Códigos Promocionais em Apostas Esportivas</h5>
+          <p>Breve explicação e menção do bônus de boas-vindas.</p>
+          <h5>
+            H2: Como Funcionam os Códigos Promocionais em [Nome do Operador]
+          </h5>
+          <ul>
+            <li>Tipos de códigos disponíveis</li>
+            <li>H3 Benefícios para os apostadores</li>
+          </ul>
+          <h5>H2: Passo a Passo: Como Usar um Código Promocional</h5>
+          <ul>
+            <li>Processo de registro e aplicação do código</li>
+            <li>
+              H3 Dicas para evitar problemas comuns (Como criar uma boa senha,
+              esqueci meus dados, contatar o Apoio ao Cliente para algum
+              problema)
+            </li>
+          </ul>
+          <h5>H2: Bônus e Promoções Disponíveis</h5>
+          <ul>
+            <li>Detalhes do bônus de boas-vindas</li>
+            <li>Outras ofertas regulares</li>
+            <li>H3 Termos e condições importantes</li>
+          </ul>
+          <h5>H2: Estratégias para Maximizar Seus Códigos Promocionais</h5>
+          <ul>
+            <li>
+              H3 Dicas baseadas em experiência real (Simular a aplicação do
+              bônus em um campeonato factual ou jogo importante)
+            </li>
+            <li>H3 Como cumprir requisitos de rollover eficientemente</li>
+          </ul>
+          <h5>H2: Apostas Esportivas Elegíveis para Códigos Promocionais</h5>
+          <p>Principais esportes e mercados.</p>
+          <h5>H2: Comparação com Outros Operadores em Portugal</h5>
+          <p>
+            Verificar eventos na semana ou campeonatos e trazer um comparativo
+            de odds entre os principais operadores.
+          </p>
+          <h5>H3: Trazer uma sugestão de link para alguma palpite de jogo.</h5>
+          <h5>H2: Aspectos Legais e Regulatórios</h5>
+          <ul>
+            <li>Informações sobre a legalidade das apostas esportivas</li>
+            <li>H3 Compromisso do operador com o jogo responsável</li>
+          </ul>
+          <h5>H2: FAQ</h5>
+          <ul>
+            <li>5-7 perguntas mais comuns sobre códigos promocionais</li>
+          </ul>
+          <h5>H2: Conclusão</h5>
+          <p>
+            Aproveitando ao Máximo os Códigos Promocionais em [Nome do Operador]
+          </p>
+        </div>
+      </div>
+
+      <div id="appInfo" class="accordion">
+        <div class="accordion-header">▶ Important Information for App</div>
+        <div class="accordion-content">
+          <h3>Important</h3>
+          <h4>User Intent</h4>
+          <p>
+            Users look for comprehensive information about app usage including
+            installation, core functionalities, and support options. They aim
+            to:
+          </p>
+          <ul>
+            <li>
+              Find information about app download and installation process
+              (iOS/Android)
+            </li>
+            <li>Discover device and operating system requirements</li>
+            <li>Check regional availability and geographical restrictions</li>
+            <li>Explore essential features and functionalities of the app</li>
+            <li>
+              Understand how to navigate the interface and use basic functions
+            </li>
+            <li>Learn about competitive advantages and unique benefits</li>
+            <li>Understand the registration and account creation process</li>
+            <li>Find information about payment methods and plans</li>
+            <li>Discover configuration and customization options</li>
+            <li>Locate user guides and tutorials</li>
+            <li>Find customer support channels</li>
+            <li>Access FAQ and solutions for common issues</li>
+            <li>Understand data protection measures</li>
+            <li>Learn about privacy policies</li>
+            <li>Check app permission requirements</li>
+          </ul>
+          <h4>Tone and Voice</h4>
+          <ul>
+            <li>Use active and direct language</li>
+            <li>
+              Maintain an informative tone without promotional exaggeration
+            </li>
+            <li>Prioritize clarity and objectivity in explanations</li>
+            <li>
+              We are not the bookmaker, so don’t use the pronoun “us” (or “our
+              bonuses”, “our promos,” etc.)
+            </li>
+          </ul>
+          <h4>Keywords</h4>
+          <p>
+            Remember: If you’re using Surfer SEO, Yoast, or any tool that checks
+            your content, don’t take recommendations literally. This can take
+            the natural tone of the article. We must always think about user
+            intent first.
+          </p>
+          <ul>
+            <li>
+              Keyword Stuffing: We do not recommend that practice. Place the
+              main keyword at the top of the article and naturally 2 or 3 times.
+              You can use the H2 also.
+            </li>
+            <li>
+              Keywords that are misspelled should always be corrected,
+              regardless of what the brief says;
+            </li>
+            <li>The same applies to accents;</li>
+            <li>
+              Capitalization must also be corrected since they affect the
+              overall quality of the text and may harm compliance;
+            </li>
+            <li>
+              Hyphens, dots, and spaces should be appropriately used as well,
+              since they do not affect ranking, but harm the quality of the text
+              if incorrect;
+            </li>
+          </ul>
+          <h4>Article Title & Meta Title</h4>
+          <p>
+            Tool to check:
+            <a
+              href="https://mangools.com/free-seo-tools/serp-simulator"
+              target="_blank"
+              >Serp Simulator</a
+            >
+          </p>
+          <h5>IMPORTANT: Article Title</h5>
+          <ul>
+            <li>Hook readers in first 3-5 words</li>
+            <li>Keep between 50-60 characters</li>
+            <li>Front-load keywords</li>
+            <li>Write in active voice</li>
+            <li>Include the current year when relevant</li>
+            <li>Use emotion-triggering words</li>
+            <li>Address user intent directly</li>
+            <li>Create clear value proposition</li>
+          </ul>
+          <h5>Technical Best Practices</h5>
+          <ul>
+            <li>Primary keyword within the first 3 words</li>
+            <li>Format: Primary Keyword - Secondary Keyword | Brand</li>
+            <li>No special characters (except - and |)</li>
+            <li>Title case format</li>
+            <li>Include power words (Best, Guide, How, Why)</li>
+            <li>Numbers at the beginning when relevant</li>
+            <li>Use modifiers (Ultimate, Complete, Best)</li>
+            <li>
+              Example Article Titles: "Bónus com Betano APP: Ofertas Exclusivas
+              2025 | Use Vivaclic"
+            </li>
+          </ul>
+          <h5>IMPORTANT: Meta description</h5>
+          <ul>
+            <li>Write compelling call-to-action</li>
+            <li>Describe the unique value proposition</li>
+            <li>Use natural, conversational language</li>
+            <li>Address the reader's main problem</li>
+            <li>Include benefit statements</li>
+            <li>Match search intent</li>
+            <li>Avoid clickbait language</li>
+            <li>Maintain brand voice</li>
+          </ul>
+          <h5>Technical Best Practices</h5>
+          <ul>
+            <li>Length: 140-160 characters</li>
+            <li>Include primary and secondary keywords</li>
+            <li>Use action verbs</li>
+            <li>Add call-to-action</li>
+            <li>No duplicate meta descriptions</li>
+            <li>Avoid quotes or special characters</li>
+            <li>Match content accurately</li>
+            <li>Include key benefits or features</li>
+          </ul>
+          <p>
+            Example Meta Descriptions: “O Betano APP oferece bônus exclusivos,
+            ofertas imperdíveis e dicas de especialistas. Um clique e aposte com
+            confiança"
+          </p>
+
+          <h4>Content</h4>
+          <ul>
+            <li>
+              Use short sentences, and avoid heavy structures or overly
+              complicated/formal language.
+            </li>
+            <li>
+              Sentence length: not more than 20 words. All content is
+              mobile-first focused.
+            </li>
+            <li>
+              Paragraph length: not more than 300 words. All content is
+              mobile-first focused.
+            </li>
+            <li>
+              Use numbered lists for step-by-steps and bullet lists for names,
+              T&Cs, categories, sections, etc.
+            </li>
+            <li>
+              Keep numbered lists up to 7 steps long, with a couple of sentences
+              each, maximum, and bullet lists up to 10 points.
+            </li>
+            <li>
+              Bonus: Keep bullet lists of up to 5 and add promo code, rollover,
+              validity, and offer evaluation.
+            </li>
+            <li>
+              Please, avoid using "he," "she," or "them" when referring to
+              operators and give preference to synonyms like "operator,"
+              "platform," "betting company," etc.
+            </li>
+            <li>
+              If you are abroad, please use a VPN to make sure that the bonuses
+              mentioned are available for people in the targeted country.
+            </li>
+            <li>100% original content.</li>
+            <li>
+              Use bold to highlight key phrases (avoid single words, as well as
+              entire sentences or even two sentences in a row), button names,
+              and any promo codes given (for the latter two, don’t use italics
+              or quotation marks).
+            </li>
+            <li>
+              Use transition words such as: for example, most importantly,
+              firstly, in addition, in conclusion, above all, in other words,
+              etc.
+            </li>
+          </ul>
+          <h4>Example of Content Structure</h4>
+          <p>
+            Think of the article as a pyramid: Answer the user intent right away
+            in 1 or 2 paragraphs.
+          </p>
+          <h5>H2: Introdução à App do Operador para Apostas Desportivas</h5>
+          <p>
+            Visão geral sobre o que a app oferece, suas principais vantagens e
+            como ela se destaca no mercado português.
+          </p>
+
+          <h5>H2: Instalação e Compatibilidade</h5>
+          <h6>H3: Como Fazer o Download e Instalar a App do Operador</h6>
+          <ul>
+            <li>
+              H3 Guia para Android: Passo a Passo - Instruções precisas para
+              baixar e instalar a app em dispositivos Android.
+            </li>
+            <li>
+              H3 Guia para iOS: Passo a Passo - Processo para instalar a app em
+              dispositivos iOS.
+            </li>
+            <li>
+              H3 Resolução de Problemas Comuns Durante a Instalação - Solução de
+              problemas frequentes para garantir uma instalação tranquila.
+            </li>
+          </ul>
+
+          <h5>H3: Compatibilidade e Requisitos</h5>
+          <ul>
+            <li>Dispositivos e sistemas operacionais compatíveis.</li>
+            <li>
+              Disponibilidade regional e possíveis restrições geográficas.
+            </li>
+          </ul>
+
+          <h5>H2: Funcionalidades Principais da App do Operador</h5>
+          <h6>
+            H3: Core Functionality: Exploração de Funcionalidades Essenciais
+          </h6>
+          <ul>
+            <li>H3: Apostas ao Vivo: Coloque Apostas em Tempo Real</li>
+            <li>H3: Notificações Personalizadas</li>
+            <li>H3: Navegação e Utilização das Funcionalidades Básicas</li>
+            <li>H3: Vantagens Competitivas e Benefícios Únicos</li>
+          </ul>
+          <h5>H2: Gestão de Conta</h5>
+          <h6>H3: Processo de Registo e Criação de Conta</h6>
+          <p>Informação sobre como registrar e criar uma conta na app.</p>
+          <h6>
+            H3: Gestão de Conta: Depósitos, Levantamentos e Histórico de Apostas
+          </h6>
+          <p>
+            Como gerir os aspetos financeiros e o histórico de atividades na
+            app.
+          </p>
+          <h6>H3: Métodos de Pagamento e Planos Disponíveis</h6>
+          <p>Detalhes das opções de pagamento e planos oferecidos.</p>
+          <h6>H3: Opções de Configuração e Personalização</h6>
+          <p>
+            Ajustes e personalização disponíveis para melhorar a experiência do
+            utilizador.
+          </p>
+          <h5>H2: Suporte e Ajuda</h5>
+          <h6>H3: Guias do Utilizador e Tutoriais</h6>
+          <p>Localizar materiais instrutivos para orientação.</p>
+          <h6>H3: Canais de Suporte ao Cliente</h6>
+          <p>Meios para entrar em contato com o suporte técnico.</p>
+          <h6>
+            H3: FAQ: Respostas a Perguntas Frequentes e Soluções para Problemas
+            Comuns
+          </h6>
+          <p>Acesso a questões comuns e suas soluções diretas.</p>
+          <h5>H2: Segurança e Privacidade</h5>
+          <h6>H3: Medidas de Proteção de Dados</h6>
+          <p>Compreensão das práticas de segurança da app.</p>
+          <h6>H3: Políticas de Privacidade</h6>
+          <p>Informação sobre como os dados do usuário são protegidos.</p>
+          <h6>H3: Requisitos de Permissão da App</h6>
+          <p>
+            Detalhes sobre as permissões necessárias para o funcionamento da
+            app.
+          </p>
+          <h5>H2: Conclusão: Vale a Pena Apostar na App do Operador?</h5>
+          <p>
+            Resumo dos benefícios e uma avaliação final da app, considerando
+            todos os aspetos cobertos.
+          </p>
+        </div>
+      </div>
+
+      <div id="reviewInfo" class="accordion">
+        <div class="accordion-header">▶ Important Information for Review</div>
+        <div class="accordion-content">
+          <h3>Important</h3>
+          <h4>User Intent</h4>
+          <p>
+            The user's intent when accessing review pages is generally to obtain
+            detailed and unbiased information about a product, service, or
+            application before making a purchase or usage decision.
+            Specifically, users seek:
+          </p>
+          <ul>
+            <li>
+              Ratings and Opinions: Users are looking for experiences from other
+              users to verify the effectiveness, quality, and reliability of the
+              product or service.
+            </li>
+            <li>
+              Pros and Cons: They want to understand the strengths and
+              weaknesses to assess if the product or service meets their
+              specific needs.
+            </li>
+            <li>
+              Details on Features and Functionalities: Users seek information
+              about the main characteristics, capabilities, and functionalities
+              offered.
+            </li>
+            <li>
+              Comparisons with Competitors: There is interest in comparisons
+              with similar products or services to determine which offers better
+              value or excels in certain areas.
+            </li>
+            <li>
+              Price and Value for Money: Users want to determine if the price is
+              justified by the features and quality, and if there are any
+              promotions or discounts available.
+            </li>
+            <li>
+              Credibility and Authority: Users trust reviews from reliable and
+              specialized sources for assurance of impartiality.
+            </li>
+            <li>
+              User Experience: Information about ease of use, customer support,
+              return policies, and warranty.
+            </li>
+          </ul>
+          <h4>Keywords</h4>
+          <p>
+            Remember: If you’re using Surfer SEO, Yoast, or any tool that checks
+            your content, don’t take recommendations literally. This can take
+            the natural tone of the article. We must always think about user
+            intent first.
+          </p>
+          <ul>
+            <li>
+              Keyword Stuffing: We do not recommend that practice. Place the
+              main Keyword at the top of the article and naturally 2 or 3 times.
+              You can use the H2 also.
+            </li>
+            <li>
+              Keywords that are misspelled should always be corrected,
+              regardless of what the brief says;
+            </li>
+            <li>The same applies to accents;</li>
+            <li>
+              Capitalization must also be corrected since they affect the
+              overall quality of the text and may harm compliance;
+            </li>
+            <li>
+              Hyphens, dots, and spaces should be appropriately used as well,
+              since they do not affect ranking, but harm the quality of the text
+              if incorrect;
+            </li>
+          </ul>
+          <h4>Article Title & Meta Title</h4>
+          <p>
+            Tool to check:
+            <a
+              href="https://mangools.com/free-seo-tools/serp-simulator"
+              target="_blank"
+              >Serp Simulator</a
+            >
+          </p>
+          <h5>IMPORTANT: Article Title</h5>
+          <ul>
+            <li>Hook readers in first 3-5 words</li>
+            <li>Keep between 50-60 characters</li>
+            <li>Front-load keywords</li>
+            <li>Write in active voice</li>
+            <li>Include the current year when relevant</li>
+            <li>Use emotion-triggering words</li>
+            <li>Address user intent directly</li>
+            <li>Create clear value proposition</li>
+          </ul>
+          <h5>Technical Best Practices</h5>
+          <ul>
+            <li>Primary keyword within the first 3 words</li>
+            <li>Format: Primary Keyword - Secondary Keyword | Brand</li>
+            <li>No special characters (except - and |)</li>
+            <li>Title case format</li>
+            <li>Include power words (Best, Guide, How, Why)</li>
+            <li>Numbers at the beginning when relevant</li>
+            <li>Use modifiers (Ultimate, Complete, Best)</li>
+            <li>
+              Example Article Titles: "Review Completa do [Nome do
+              Produto/Serviço]: Custos, Funcionalidades e Mais"
+            </li>
+          </ul>
+          <h5>IMPORTANT: Meta description</h5>
+          <ul>
+            <li>Write compelling call-to-action</li>
+            <li>Describe the unique value proposition</li>
+            <li>Use natural, conversational language</li>
+            <li>Address the reader's main problem</li>
+            <li>Include benefit statements</li>
+            <li>Match search intent</li>
+            <li>Avoid clickbait language</li>
+            <li>Maintain brand voice</li>
+          </ul>
+          <h5>Technical Best Practices</h5>
+          <ul>
+            <li>Length: 140-160 characters</li>
+            <li>Include primary and secondary keywords</li>
+            <li>Use action verbs</li>
+            <li>Add call-to-action</li>
+            <li>No duplicate meta descriptions</li>
+            <li>Avoid quotes or special characters</li>
+            <li>Match content accurately</li>
+            <li>Include key benefits or features</li>
+          </ul>
+          <p>
+            Example Meta Descriptions: “Tome a decisão certa! Leia nossa análise
+            completa do [Nome do Produto/Serviço]. Descubra as principais
+            funcionalidades, prós e contras, comparações com concorrentes e
+            mais"
+          </p>
+          <h4>Content</h4>
+          <ul>
+            <li>
+              Use short sentences, and avoid heavy structures or overly
+              complicated/formal language.
+            </li>
+            <li>
+              Sentence length: not more than 20 words. All content is
+              mobile-first focused.
+            </li>
+            <li>
+              Paragraph length: not more than 300 words. All content is
+              mobile-first focused.
+            </li>
+            <li>
+              Use numbered lists for step-by-steps and bullet lists for names,
+              T&Cs, categories, sections, etc.
+            </li>
+            <li>
+              Keep numbered lists up to 7 steps long, with a couple of sentences
+              each, maximum, and bullet lists up to 10 points.
+            </li>
+            <li>
+              Bonus: Keep bullet lists of up to 5 and add promo code, rollover,
+              validity, and offer evaluation.
+            </li>
+            <li>
+              Please, avoid using "he," "she," or "them" when referring to
+              operators and give preference to synonyms like "operator,"
+              "platform," "betting company," etc.
+            </li>
+            <li>
+              If you are abroad, please use a VPN to make sure that the bonuses
+              mentioned are available for people in the targeted country.
+            </li>
+            <li>100% original content.</li>
+            <li>
+              Use bold to highlight key phrases (avoid single words, as well as
+              entire sentences or even two sentences in a row), button names,
+              and any promo codes given (for the latter two, don’t use italics
+              or quotation marks).
+            </li>
+            <li>
+              Use transition words such as: for example, most importantly,
+              firstly, in addition, in conclusion, above all, in other words,
+              etc.
+            </li>
+          </ul>
+          <h4>Example of Content Structure</h4>
+          <p>
+            Think of the article as a pyramid: Answer the user intent right away
+            in 1 or 2 paragraphs.
+          </p>
+          <h5>H2: Introdução</h5>
+          <p>
+            Apresente uma visão geral explicando a importância das avaliações
+            para ajudar os usuários a tomarem decisões informadas sobre
+            produtos, serviços ou aplicativos.
+          </p>
+          <h5>H2: Avaliações e Opiniões</h5>
+          <h6>H3: Experiências de Usuários</h6>
+          <p>
+            Explique como as avaliações e opiniões de outros usuários fornecem
+            insights sobre a eficácia, qualidade e confiabilidade do produto.
+          </p>
+          <h6>H3: Avaliações de Especialistas</h6>
+          <p>
+            Discuta o papel das opiniões de especialistas em oferecer uma visão
+            autorizada do desempenho do produto.
+          </p>
+          <h5>H2: Prós e Contras</h5>
+          <h6>H3: Pontos Fortes</h6>
+          <p>
+            Destaque as principais vantagens e aspectos positivos do produto ou
+            serviço.
+          </p>
+          <h6>H3: Pontos Fracos</h6>
+          <p>
+            Descreva qualquer desvantagem ou limitação que os usuários devem
+            estar cientes.
+          </p>
+
+          <h5>H2: Detalhes sobre Recursos e Funcionalidades</h5>
+          <h6>H3: Características Principais</h6>
+          <p>
+            Descreva as características e capacidades principais do produto ou
+            serviço.
+          </p>
+          <h6>H3: Usabilidade</h6>
+          <p>
+            Discuta como os usuários podem navegar e utilizar o produto ou
+            serviço facilmente, incluindo qualquer curva de aprendizado.
+          </p>
+          <h5>H2: Comparações com Concorrentes</h5>
+          <h6>H3: Produtos ou Serviços Similares</h6>
+          <p>
+            Ofereça uma comparação com produtos ou serviços semelhantes,
+            enfatizando diferenças em características, desempenho ou valor.
+          </p>
+          <h6>H3: Diferenciais de Vendas</h6>
+          <p>
+            Identifique o que diferencia este produto ou serviço de seus
+            concorrentes.
+          </p>
+          <h5>H2: Preço e Custo-Benefício</h5>
+          <h6>H3: Informação de Preço</h6>
+          <p>Forneça detalhes sobre o custo do produto ou serviço.</p>
+          <h6>H3: Análise de Custo-Benefício</h6>
+          <p>
+            Analise se o preço do produto é justificado pelas suas
+            características e qualidade, e mencione quaisquer promoções ou
+            descontos disponíveis.
+          </p>
+          <h5>H2: Credibilidade e Autoridade</h5>
+          <h6>H3: Confiabilidade das Fontes</h6>
+          <p>
+            Discuta a importância de obter avaliações de fontes confiáveis e
+            especializadas.
+          </p>
+          <h6>H3: Garantia de Imparcialidade</h6>
+          <p>
+            Explique como análises imparciais ajudam a construir a confiança dos
+            potenciais clientes.
+          </p>
+          <h5>H2: Experiência do Usuário</h5>
+          <h6>H3: Facilidade de Uso</h6>
+          <p>
+            Descreva o quão amigável é o produto ou serviço para o usuário,
+            incluindo desafios potenciais na sua operação.
+          </p>
+          <h6>H3: Suporte ao Cliente e Políticas</h6>
+          <p>
+            Forneça informações sobre opções de suporte ao cliente, políticas de
+            devolução, e detalhes de garantia.
+          </p>
+
+          <h5>H2: Conclusão</h5>
+          <p>
+            Resuma os principais pontos abordados na avaliação, reforçando a
+            adequação do produto para o público-alvo com base nos insights
+            reunidos.
+          </p>
+        </div>
+      </div>
+
+      <div id="levantamentosInfo" class="accordion">
+        <div class="accordion-header">
+          ▶ Important Information for Levantamentos
+        </div>
+        <div class="accordion-content">
+          <h3>Important</h3>
+          <h4>User Intent</h4>
+          <p>
+            Users accessing information about withdrawals are generally
+            interested in understanding the process thoroughly to ensure a
+            smooth transaction. Specifically, users seek:
+          </p>
+          <ul>
+            <li>
+              Withdrawal Speed: Information on how long it will take to receive
+              funds.
+            </li>
+            <li>
+              Available Payment Methods: Details on various methods such as bank
+              transfers, e-wallets, and cryptocurrencies.
+            </li>
+            <li>
+              Withdrawal Limits: Understanding minimum and maximum limits for
+              different payment methods.
+            </li>
+            <li>
+              Associated Fees: Awareness of any fees applied based on the method
+              or amount withdrawn.
+            </li>
+            <li>
+              Security and Protection: Assurance that the withdrawal process is
+              secure.
+            </li>
+            <li>
+              Verification Procedure: Knowledge about identification
+              requirements for withdrawals.
+            </li>
+            <li>
+              Common Issues and Solutions: Insights into recurring issues and
+              resolutions.
+            </li>
+            <li>
+              Terms and Conditions: Detailed terms related to withdrawals.
+            </li>
+            <li>
+              Customer Support: Assurance of accessible support if issues arise.
+            </li>
+          </ul>
+
+          <h4>Tone and Voice</h4>
+          <ul>
+            <li>Use active and direct language</li>
+            <li>
+              Maintain an informative tone without promotional exaggeration
+            </li>
+            <li>Prioritize clarity and objectivity in explanations</li>
+            <li>
+              We are not the bookmaker, so don’t use the pronoun “us” (or “our
+              bonuses”, “our promos,” etc.)
+            </li>
+          </ul>
+
+          <h4>Keywords</h4>
+          <p>
+            Remember: If you’re using Surfer SEO, Yoast, or any tool that checks
+            your content, don’t take recommendations literally. This can take
+            the natural tone of the article. We must always think about user
+            intent first.
+          </p>
+          <ul>
+            <li>
+              Keyword Stuffing: We do not recommend that practice. Place the
+              main Keyword at the top of the article and naturally 2 or 3 times.
+              You can use the H2 also.
+            </li>
+            <li>
+              Keywords that are misspelled should always be corrected,
+              regardless of what the brief says;
+            </li>
+            <li>The same applies to accents;</li>
+            <li>
+              Capitalization must also be corrected since they affect the
+              overall quality of the text and may harm compliance;
+            </li>
+            <li>
+              Hyphens, dots, and spaces should be appropriately used as well,
+              since they do not affect ranking, but harm the quality of the text
+              if incorrect;
+            </li>
+          </ul>
+
+          <h4>Article Title & Meta Title</h4>
+          <p>
+            Tool to check:
+            <a
+              href="https://mangools.com/free-seo-tools/serp-simulator"
+              target="_blank"
+              >Serp Simulator</a
+            >
+          </p>
+          <h5>IMPORTANT: Article Title</h5>
+          <ul>
+            <li>Hook readers in first 3-5 words</li>
+            <li>Keep between 50-60 characters</li>
+            <li>Front-load keywords</li>
+            <li>Write in active voice</li>
+            <li>Include the current year when relevant</li>
+            <li>Use emotion-triggering words</li>
+            <li>Address user intent directly</li>
+            <li>Create clear value proposition</li>
+          </ul>
+          <h5>Technical Best Practices</h5>
+          <ul>
+            <li>Primary keyword within the first 3 words</li>
+            <li>Format: Primary Keyword - Secondary Keyword | Brand</li>
+            <li>No special characters (except - and |)</li>
+            <li>Title case format</li>
+            <li>Include power words (Best, Guide, How, Why)</li>
+            <li>Numbers at the beginning when relevant</li>
+            <li>Use modifiers (Ultimate, Complete, Best)</li>
+            <li>
+              Example Article Titles: "Levantamento Betano: os seus lucros em um
+              clique"
+            </li>
+          </ul>
+
+          <h5>IMPORTANT: Meta description</h5>
+          <ul>
+            <li>Write compelling call-to-action</li>
+            <li>Describe the unique value proposition</li>
+            <li>Use natural, conversational language</li>
+            <li>Address the reader's main problem</li>
+            <li>Include benefit statements</li>
+            <li>Match search intent</li>
+            <li>Avoid clickbait language</li>
+            <li>Maintain brand voice</li>
+          </ul>
+          <h5>Technical Best Practices</h5>
+          <ul>
+            <li>Length: 140-160 characters</li>
+            <li>Include primary and secondary keywords</li>
+            <li>Use action verbs</li>
+            <li>Add call-to-action</li>
+            <li>No duplicate meta descriptions</li>
+            <li>Avoid quotes or special characters</li>
+            <li>Match content accurately</li>
+            <li>Include key benefits or features</li>
+          </ul>
+          <p>
+            Example Meta Descriptions: “A Betano oferece levantamento imediato!
+            Basta um clique para o dinheiro estar na sua conta. Confira"
+          </p>
+
+          <h4>Content</h4>
+          <ul>
+            <li>
+              Use short sentences, and avoid heavy structures or overly
+              complicated/formal language.
+            </li>
+            <li>
+              Sentence length: not more than 20 words. All content is
+              mobile-first focused.
+            </li>
+            <li>
+              Paragraph length: not more than 300 words. All content is
+              mobile-first focused.
+            </li>
+            <li>
+              Use numbered lists for step-by-steps and bullet lists for names,
+              T&Cs, categories, sections, etc.
+            </li>
+            <li>
+              Keep numbered lists up to 7 steps long, with a couple of sentences
+              each, maximum, and bullet lists up to 10 points.
+            </li>
+            <li>
+              Bonus: Keep bullet lists of up to 5 and add promo code, rollover,
+              validity, and offer evaluation.
+            </li>
+            <li>
+              Please, avoid using "he," "she," or "them" when referring to
+              operators and give preference to synonyms like "operator,"
+              "platform," "betting company," etc.
+            </li>
+            <li>
+              If you are abroad, please use a VPN to make sure that the bonuses
+              mentioned are available for people in the targeted country.
+            </li>
+            <li>100% original content.</li>
+            <li>
+              Use bold to highlight key phrases (avoid single words, as well as
+              entire sentences or even two sentences in a row), button names,
+              and any promo codes given (for the latter two, don’t use italics
+              or quotation marks).
+            </li>
+            <li>
+              Use transition words such as: for example, most importantly,
+              firstly, in addition, in conclusion, above all, in other words,
+              etc.
+            </li>
+          </ul>
+          <h4>Example of Content Structure</h4>
+          <p>
+            Think of the article as a pyramid: Answer the user intent right away
+            in 1 or 2 paragraphs.
+          </p>
+          <h5>H2: Introdução</h5>
+          <p>
+            Forneça uma visão geral sobre a importância de entender o processo
+            de levantamento em sites de apostas desportivas e como isso impacta
+            a satisfação dos utilizadores.
+          </p>
+          <h5>H2: Velocidade do Levantamento</h5>
+          <h6>H3: Prazos Esperados</h6>
+          <p>
+            Explique o tempo típico que leva para processar levantamentos para
+            diferentes métodos de pagamento.
+          </p>
+          <h6>H3: Fatores que Afetam a Velocidade</h6>
+          <p>
+            Discuta potenciais fatores que podem influenciar o tempo de
+            processamento dos levantamentos.
+          </p>
+          <h5>H2: Métodos de Pagamento Disponíveis</h5>
+          <h6>H3: Visão Geral das Opções de Pagamento</h6>
+          <p>
+            Liste e descreva os vários métodos de levantamento oferecidos pelo
+            site.
+          </p>
+          <h6>H3: Escolhendo o Método Certo</h6>
+          <p>
+            Dicas para selecionar o método de levantamento mais conveniente e
+            económico.
+          </p>
+          <h5>H2: Limites de Levantamento</h5>
+          <h6>H3: Limites Mínimos e Máximos</h6>
+          <p>
+            Descreva os limites de levantamento associados a diferentes métodos
+            de pagamento.
+          </p>
+          <h6>H3: Ajuste dos Seus Limites</h6>
+          <p>
+            Explique procedimentos para ajustar limites de levantamento, se
+            necessário.
+          </p>
+          <h5>H2: Taxas Associadas</h5>
+          <h6>H3: Compreendendo as Taxas</h6>
+          <p>
+            Detalhe quaisquer taxas que possam aplicar-se aos levantamentos,
+            incluindo como variam por método.
+          </p>
+          <h6>H3: Dicas para Evitar ou Minimizar Taxas</h6>
+          <p>
+            Ofereça conselhos sobre como minimizar ou evitar taxas ao efetuar
+            levantamentos.
+          </p>
+          <h5>H2: Segurança e Proteção</h5>
+          <h6>H3: Garantindo Transações Seguras</h6>
+          <p>
+            Discuta medidas em vigor para proteger os dados dos utilizadores
+            durante os levantamentos.
+          </p>
+          <h6>H3: Verificação de Identidade</h6>
+          <p>
+            Explique o processo de verificação de identidade e por que é
+            necessário para transações seguras.
+          </p>
+          <h5>H2: Problemas Comuns e Soluções</h5>
+          <h6>H3: Problemas Frequentes Encontrados</h6>
+          <p>
+            Identifique problemas comuns de levantamento que os utilizadores
+            enfrentam.
+          </p>
+          <h6>H3: Resolução de Problemas de Levantamento</h6>
+          <p>Forneça soluções e passos para resolver problemas comuns.</p>
+          <h5>H2: Termos e Condições</h5>
+          <h6>H3: Termos Chave a Conhecer</h6>
+          <p>
+            Destaque termos e condições importantes relacionados aos
+            levantamentos.
+          </p>
+          <h6>H3: Evitando Problemas Comuns</h6>
+          <p>
+            Conselhos para navegar pelos termos para evitar mal-entendidos ou
+            problemas.
+          </p>
+          <h5>H2: Suporte ao Cliente</h5>
+          <h6>H3: Como Contactar o Suporte</h6>
+          <p>
+            Informação sobre como contactar o suporte ao cliente para ajuda com
+            levantamentos.
+          </p>
+          <h6>H3: Recursos de Apoio</h6>
+          <p>
+            Visão geral dos recursos de apoio e ferramentas disponibilizadas
+            pelo site.
+          </p>
+          <h5>H2: Conclusão</h5>
+          <p>
+            Resuma os principais pontos discutidos, reforçando a importância de
+            estar informado sobre os processos de levantamento para garantir uma
+            experiência fluida e segura.
+          </p>
+        </div>
+      </div>
+
+      <div id="bonusInfo" class="accordion">
+        <div class="accordion-header">▶ Important Information for Bonus</div>
+        <div class="accordion-content">
+          <h3>Important</h3>
+          <h4>User Intent</h4>
+          <p>
+            The user's intent when searching for bonuses at betting sites is
+            primarily to maximize their initial or ongoing betting value and
+            returns. Users are often looking for attractive offers that provide
+            them with extra betting funds, such as welcome bonuses, no-deposit
+            bonuses, or promotions tied to specific events.
+          </p>
+          <p>
+            Additionally, bettors want to understand the requirements associated
+            with these bonuses, including wagering conditions, validity periods,
+            and any other specific terms, ensuring they can fully benefit from
+            the promotions offered. Users also seek comparative information
+            across different betting sites to identify which offers the best and
+            most advantageous bonus, helping them decide where to place their
+            money based on available incentives.
+          </p>
+          <h4>Tone and Voice</h4>
+          <ul>
+            <li>Use active and direct language</li>
+            <li>
+              Maintain an informative tone without promotional exaggeration
+            </li>
+            <li>Prioritize clarity and objectivity in explanations</li>
+            <li>
+              We are not the bookmaker, so don’t use the pronoun “us” (or “our
+              bonuses”, “our promos,” etc.)
+            </li>
+          </ul>
+          <h4>Keywords</h4>
+          <p>
+            Remember: If you’re using Surfer SEO, Yoast, or any tool that checks
+            your content, don’t take recommendations literally. This can take
+            the natural tone of the article. We must always think about user
+            intent first.
+          </p>
+          <ul>
+            <li>
+              Keyword Stuffing: We do not recommend that practice. Place the
+              main Keyword at the top of the article and naturally 2 or 3 times.
+              You can use the H2 also.
+            </li>
+            <li>
+              Keywords that are misspelled should always be corrected,
+              regardless of what the brief says;
+            </li>
+            <li>The same applies to accents;</li>
+            <li>
+              Capitalization must also be corrected since they affect the
+              overall quality of the text and may harm compliance;
+            </li>
+            <li>
+              Hyphens, dots, and spaces should be appropriately used as well,
+              since they do not affect ranking, but harm the quality of the text
+              if incorrect;
+            </li>
+          </ul>
+          <h4>Article Title & Meta Title</h4>
+          <p>
+            Tool to check:
+            <a
+              href="https://mangools.com/free-seo-tools/serp-simulator"
+              target="_blank"
+              >Serp Simulator</a
+            >
+          </p>
+          <h5>IMPORTANT: Article Title</h5>
+          <ul>
+            <li>Hook readers in first 3-5 words</li>
+            <li>Keep between 50-60 characters</li>
+            <li>Front-load keywords</li>
+            <li>Write in active voice</li>
+            <li>Include the current year when relevant</li>
+            <li>Use emotion-triggering words</li>
+            <li>Address user intent directly</li>
+            <li>Create clear value proposition</li>
+          </ul>
+          <h5>Technical Best Practices</h5>
+          <ul>
+            <li>Primary keyword within the first 3 words</li>
+            <li>Format: Primary Keyword - Secondary Keyword | Brand</li>
+            <li>No special characters (except - and |)</li>
+            <li>Title case format</li>
+            <li>Include power words (Best, Guide, How, Why)</li>
+            <li>Numbers at the beginning when relevant</li>
+            <li>Use modifiers (Ultimate, Complete, Best)</li>
+            <li>
+              Example Article Titles: “Com a Betano bónus você faz a primeira
+              aposta sem risco até 150€”
+            </li>
+          </ul>
+          <h5>IMPORTANT: Meta description</h5>
+          <ul>
+            <li>Write compelling call-to-action</li>
+            <li>Describe the unique value proposition</li>
+            <li>Use natural, conversational language</li>
+            <li>Address the reader's main problem</li>
+            <li>Include benefit statements</li>
+            <li>Match search intent</li>
+            <li>Avoid clickbait language</li>
+            <li>Maintain brand voice</li>
+          </ul>
+          <h5>Technical Best Practices</h5>
+          <ul>
+            <li>Length: 140-160 characters</li>
+            <li>Include primary and secondary keywords</li>
+            <li>Use action verbs</li>
+            <li>Add call-to-action</li>
+            <li>No duplicate meta descriptions</li>
+            <li>Avoid quotes or special characters</li>
+            <li>Match content accurately</li>
+            <li>Include key benefits or features</li>
+          </ul>
+          <p>
+            Example Meta Descriptions: "Regista-te já! Ganha um Bónus de
+            Boas-Vindas 100% até 100€ + Bónus de 25 Jogadas Grátis. Começa a
+            jogar no maior Casino Online com um bónus de 25 jogadas grátis no
+            teu registo. Ganha 100 Jogadas Grátis."
+          </p>
+          <h4>Content</h4>
+          <ul>
+            <li>
+              Use short sentences, and avoid heavy structures or overly
+              complicated/formal language.
+            </li>
+            <li>
+              Sentence length: not more than 20 words. All content is
+              mobile-first focused.
+            </li>
+            <li>
+              Paragraph length: not more than 300 words. All content is
+              mobile-first focused.
+            </li>
+            <li>
+              Use numbered lists for step-by-steps and bullet lists for names,
+              T&Cs, categories, sections, etc.
+            </li>
+            <li>
+              Keep numbered lists up to 7 steps long, with a couple of sentences
+              each, maximum, and bullet lists up to 10 points.
+            </li>
+            <li>
+              Bonus: Keep bullet lists of up to 5 and add promo code, rollover,
+              validity, and offer evaluation.
+            </li>
+            <li>
+              Please, avoid using "he," "she," or "them" when referring to
+              operators and give preference to synonyms like "operator,"
+              "platform," "betting company," etc.
+            </li>
+            <li>
+              If you are abroad, please use a VPN to make sure that the bonuses
+              mentioned are available for people in the targeted country.
+            </li>
+            <li>100% original content.</li>
+            <li>
+              Use bold to highlight key phrases (avoid single words, as well as
+              entire sentences or even two sentences in a row), button names,
+              and any promo codes given (for the latter two, don’t use italics
+              or quotation marks).
+            </li>
+            <li>
+              Use transition words such as: for example, most importantly,
+              firstly, in addition, in conclusion, above all, in other words,
+              etc.
+            </li>
+          </ul>
+          <h4>Example of Content Structure</h4>
+          <p>
+            Think of the article as a pyramid: Answer the user intent right away
+            in 1 or 2 paragraphs.
+          </p>
+          <h5>H2: Introdução</h5>
+          <p>
+            Contextualize a importância dos bónus em casas de apostas e como
+            eles influenciam as decisões de apostas dos usuários.
+          </p>
+          <h5>H2: Tipos de Bónus Disponíveis</h5>
+          <h6>H3: Bónus de Boas-Vindas</h6>
+          <p>
+            Descreva o que são os bónus de boas-vindas e como os novos usuários
+            podem aproveitá-los ao se cadastrar.
+          </p>
+
+          <h6>H3: Bónus Sem Depósito</h6>
+          <p>
+            Explique o conceito de bónus sem depósito e suas vantagens para
+            novos usuários.
+          </p>
+          <h6>H3: Promoções Baseadas em Eventos</h6>
+          <p>
+            Detalhe ofertas especiais relacionadas a eventos desportivos ou
+            competições específicas.
+          </p>
+          <h5>H2: Termos e Condições dos Bónus</h5>
+          <h6>H3: Requisitos de Apostas</h6>
+          <p>
+            Discuta as condições usuais de apostas que devem ser cumpridas para
+            converter bónus em dinheiro real.
+          </p>
+          <h6>H3: Validade e Prazos</h6>
+          <p>
+            Explique a importância de estar atento aos prazos de validade dos
+            bónus e suas implicações.
+          </p>
+          <h6>H3: Restrição de Jogos</h6>
+          <p>
+            Detalhe quaisquer restrições de jogos específicos aplicáveis ao uso
+            dos bónus.
+          </p>
+          <h5>H2: Comparação entre Casas de Apostas</h5>
+          <h6>H3: Critérios de Comparação</h6>
+          <p>
+            Liste os critérios a considerar ao comparar bónus entre diferentes
+            casas de apostas.
+          </p>
+          <h6>H3: Análise de Ofertas</h6>
+          <p>
+            Ofereça uma análise das ofertas de bónus de várias casas de apostas,
+            destacando as mais vantajosas.
+          </p>
+          <h5>H2: Estratégias para Maximizar Bónus</h5>
+          <h6>H3: Planejamento de Apostas</h6>
+          <p>
+            Discuta como planejar suas apostas para atender aos critérios dos
+            bónus de forma eficiente.
+          </p>
+          <h6>H3: Gerenciamento de Bankroll</h6>
+          <p>
+            Ofereça dicas sobre como gerir o seu bankroll ao utilizar bónus para
+            maximizar os retornos.
+          </p>
+          <h5>H2: Conclusão</h5>
+          <p>
+            Resuma as principais considerações ao escolher bónus em casas de
+            apostas e como eles podem impactar a experiência geral de apostas.
+          </p>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("contentBriefingForm");
+        const contentBriefingPage = document.getElementById(
+          "contentBriefingPage"
+        );
+        const mainInfoPage = document.getElementById("mainInfoPage");
+        const mainInfoContent = document.getElementById("mainInfoContent");
+        const backButton = document.getElementById("backButton");
+        const copyButton = document.getElementById("copyButton");
+        const accordions = document.querySelectorAll(".accordion");
+
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const formData = {
+            country: document.getElementById("country").value,
+            language: document.getElementById("language").value,
+            topicArticleType: document.getElementById("topicArticleType").value,
+            website: document.getElementById("website").value,
+            words: document.getElementById("words").value,
+            operators: document.getElementById("operators").value,
+            bonusCodes: document.getElementById("bonusCodes").value,
+            exclusiveOffers: document.getElementById("exclusiveOffers").value,
+            termsConditions: document.getElementById("termsConditions").value,
+            keyword: document.getElementById("keyword").value,
+            otherKeywords: document.getElementById("otherKeywords").value,
+            otherImportantInfo:
+              document.getElementById("otherImportantInfo").value,
+          };
+
+          const requiredFields = [
+            "country",
+            "language",
+            "topicArticleType",
+            "website",
+            "words",
+          ];
+          const missingFields = requiredFields.filter(
+            (field) => !formData[field]
+          );
+
+          if (missingFields.length > 0) {
+            alert(
+              "Por favor, preencha todos os campos obrigatórios: " +
+                missingFields.join(", ")
+            );
+            return;
+          }
+
+          contentBriefingPage.style.display = "none";
+          mainInfoPage.style.display = "block";
+
+          accordions.forEach((accordion) => {
+            const type = formData.topicArticleType.toLowerCase();
+            accordion.style.display = accordion.id.toLowerCase().includes(type)
+              ? "block"
+              : "none";
+          });
+
+          mainInfoContent.innerHTML = `
+            ${generateInfoRow("Country", formData.country)}
+            ${generateInfoRow("Language", formData.language)}
+            ${generateInfoRow("Topic/Article Type", formData.topicArticleType)}
+            ${generateInfoRow("Website", formData.website)}
+            ${generateInfoRow("Words", formData.words)}
+            ${
+              formData.operators
+                ? generateInfoRow("Operator(s)", formData.operators)
+                : ""
+            }
+            ${
+              formData.bonusCodes
+                ? generateInfoRow("Bonus Code(s)", formData.bonusCodes)
+                : ""
+            }
+            ${
+              formData.exclusiveOffers
+                ? generateInfoRow("Exclusive Offers", formData.exclusiveOffers)
+                : ""
+            }
+            ${
+              formData.termsConditions
+                ? generateInfoRow(
+                    "Terms & Conditions",
+                    formData.termsConditions
+                  )
+                : ""
+            }
+            ${
+              formData.keyword
+                ? generateInfoRow("Keyword", formData.keyword)
+                : ""
+            }
+            ${
+              formData.otherKeywords
+                ? generateInfoRow("Other Keywords", formData.otherKeywords)
+                : ""
+            }
+            ${
+              formData.otherImportantInfo
+                ? generateInfoRow(
+                    "Other Important Info",
+                    formData.otherImportantInfo
+                  )
+                : ""
+            }
+          `;
+        });
+
+        function generateInfoRow(label, value) {
+          return `<div class="info-item"><strong>${label}:</strong> ${value}</div>`;
+        }
+
+        // Copy both input values and open accordion content
+        copyButton.addEventListener("click", function () {
+          const tempContainer = document.createElement("div");
+
+          // Add main info content
+          tempContainer.innerHTML = mainInfoContent.innerHTML;
+
+          // Add visible accordion content
+          accordions.forEach((accordion) => {
+            if (accordion.style.display === "block") {
+              tempContainer.innerHTML +=
+                accordion.querySelector(".accordion-content").innerHTML;
+            }
+          });
+
+          document.body.appendChild(tempContainer);
+
+          const range = document.createRange();
+          range.selectNodeContents(tempContainer);
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+
+          try {
+            const successful = document.execCommand("copy");
+            if (successful) {
+              alert(
+                "Content copied. Try pasting directly into Word or another rich text editor."
+              );
+            } else {
+              alert("Failed to copy content. Please try again.");
+            }
+          } catch (err) {
+            console.error("Copy command was unsuccessful", err);
+            alert(
+              "Error copying content. Please check the console for details."
+            );
+          }
+
+          selection.removeAllRanges();
+          document.body.removeChild(tempContainer);
+        });
+
+        backButton.addEventListener("click", function () {
+          mainInfoPage.style.display = "none";
+          contentBriefingPage.style.display = "block";
+        });
+
+        accordions.forEach((accordion) => {
+          accordion
+            .querySelector(".accordion-header")
+            .addEventListener("click", function () {
+              accordion.classList.toggle("active");
+            });
+        });
+      });
+    </script>
+  </body>
+</html>
